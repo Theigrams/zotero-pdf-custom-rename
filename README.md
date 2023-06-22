@@ -42,7 +42,7 @@ For example, you can add `Jab/#TOG` to the `Tags` of the item, and the plugin wi
 
 **Note**: the plugin will first read the `Jab/#` tag in the `Tags` as the short name. If there is no `Jab/#` tag, the plugin will automatically extract the short name from the full name of the journal.
 
-PS: It is recommended to install the plugin [MuiseDestiny/zotero-reference: PDF references add-on for Zotero](https://github.com/MuiseDestiny/zotero-reference) for a better experience.
+PS: It is recommended to install the plugin [MuiseDestiny/zotero-style](https://github.com/MuiseDestiny/zotero-style) for a better experience.
 
 <img width="1510" alt="Xnip2023-06-22_21-14-44" src="https://github.com/Theigrams/zotero-pdf-custom-rename/assets/26341831/3ad15e33-a6dd-4429-a550-d3f58d9fddc1">
 
