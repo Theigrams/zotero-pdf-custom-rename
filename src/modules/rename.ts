@@ -35,7 +35,8 @@ async function renameSelectedItems() {
       );
     }
     const att = attachments[0];
-    const newAttName = getAttachmentName(item);
+    let newAttName = getAttachmentName(item);
+    newAttName = Zotero.Utilities.cleanTags(newAttName);
     const status = await att.renameAttachmentFile(newAttName);
     if (status === true) {
       messageWindow(newAttName, "success");
@@ -141,6 +142,9 @@ function generateJournalShortTitle(item: Zotero.Item) {
 }
 
 function firstLetterOfEachWord(str: string) {
+  if (str === "") {
+    return "Pre";
+  }
   // Use each capitalized initial letter of the journal title as an abbreviation
   const words = str.split(" ");
   // remove lowercase words and "IEEE", "ACM", "The", numbers, etc.

@@ -1,10 +1,10 @@
 # Zotero PDF Rename
-
-[![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-round&logo=github)](https://github.com/windingwind/zotero-plugin-template)
+[![zotero target version](https://img.shields.io/badge/Zotero-7.0.*-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org/support/beta_builds)
 [![Latest release](https://img.shields.io/github/v/release/Theigrams/zotero-pdf-custom-rename)](https://github.com/Theigrams/zotero-pdf-custom-rename/releases)
-![Release Date](https://img.shields.io/github/release-date/Theigrams/zotero-pdf-custom-rename?color=9cf)
-[![License](https://img.shields.io/github/license/Theigrams/zotero-pdf-custom-rename)](https://github.com/Theigrams/zotero-pdf-custom-rename/blob/main/LICENSE)
+[![code size](https://img.shields.io/github/languages/code-size/northword/zotero-format-metadata?style=flat-square)](#zotero-format-metadata)
 ![Downloads latest release](https://img.shields.io/github/downloads/Theigrams/zotero-pdf-custom-rename/latest/total?color=yellow)
+[![License](https://img.shields.io/github/license/Theigrams/zotero-pdf-custom-rename)](https://github.com/Theigrams/zotero-pdf-custom-rename/blob/main/LICENSE)
+[![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-round&logo=github)](https://github.com/windingwind/zotero-plugin-template)
 
 This is a Zotero plugin that allows you to rename PDF files in your Zotero library using custom rules.
 
