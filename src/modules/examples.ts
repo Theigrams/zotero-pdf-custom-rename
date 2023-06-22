@@ -43,12 +43,12 @@ export class KeyExampleFactory {
       ztoolkit.Shortcut.unregisterAll();
       return;
     }
-    const modSet = Zotero.Prefs.get("pdfrename.renameMod");
-    const keySet = Zotero.Prefs.get("pdfrename.renameKey");
+    const modSet = Zotero.Prefs.get("pdfrename.renameMod")?.toString();
+    const keySet = Zotero.Prefs.get("pdfrename.renameKey")?.toString();
     messageWindow(`Shortcut enabled: ${modSet}+${keySet}`, "success");
     ztoolkit.Shortcut.register("event", {
       id: `${config.addonRef}-key-rename`,
-      key: keySet,
+      key: keySet || "D",
       modifiers: modSet,
       callback: (keyOptions) => {
         addon.hooks.renameSelectedItems();
