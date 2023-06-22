@@ -1,15 +1,15 @@
 {
-  "name": "zotero-addon-template",
-  "version": "0.2.0",
-  "description": "Zotero Addon Template",
+  "name": "zotero-pdf-rename",
+  "version": "0.1.0",
+  "description": "Custom rename pdf",
   "config": {
-    "addonName": "Zotero Addon Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate",
-    "releasepage": "https://github.com/windingwind/zotero-addon-template/releases/latest/download/zotero-addon-template.xpi",
-    "updaterdf": "https://raw.githubusercontent.com/windingwind/zotero-addon-template/main/update.json"
+    "addonName": "Zotero PDF Rename",
+    "addonID": "pdfrename@theigrams.com",
+    "addonRef": "pdfrename",
+    "addonInstance": "AddonPDFRename",
+    "prefsPrefix": "extensions.zotero.addonpdfrename",
+    "releasepage": "https://github.com/Theigrams/zotero-pdf-custom-rename/releases/latest/download/zotero-pdf-rename.xpi",
+    "updaterdf": "https://raw.githubusercontent.com/Theigrams/zotero-pdf-custom-rename/main/update.json"
   },
   "main": "src/index.ts",
   "scripts": {
@@ -32,14 +32,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/windingwind/zotero-addon-template.git"
+    "url": "git+https://github.com/Theigrams/zotero-pdf-custom-rename.git"
   },
-  "author": "windingwind",
+  "author": "JinZhang",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/windingwind/zotero-addon-template/issues"
+    "url": "https://github.com/Theigrams/zotero-pdf-custom-rename/issues"
   },
-  "homepage": "https://github.com/windingwind/zotero-addon-template#readme",
+  "homepage": "https://github.com/Theigrams/zotero-pdf-custom-rename#readme",
   "dependencies": {
     "zotero-plugin-toolkit": "^2.1.3"
   },
