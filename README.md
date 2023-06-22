@@ -14,6 +14,9 @@ This is a Zotero plugin that allows you to rename PDF files in your Zotero libra
 
 Select one or more items in your Zotero library and right click to open the context menu. Select `Rename PDF attachments` from the menu.
 
+<img width="638" alt="image" src="https://github.com/Theigrams/zotero-pdf-custom-rename/assets/26341831/01f7ac99-0898-4a33-8377-a5ab2ed05eb8">
+
+
 Then the PDF files will be renamed according to the custom rules you set in the plugin preferences(not implemented yet).
 
 ### Default rules
@@ -38,6 +41,11 @@ A better method is manually adding the short name of the journal in the `Tags` o
 For example, you can add `Jab/#TOG` to the `Tags` of the item, and the plugin will use `TOG` as the short name of the journal.
 
 **Note**: the plugin will first read the `Jab/#` tag in the `Tags` as the short name. If there is no `Jab/#` tag, the plugin will automatically extract the short name from the full name of the journal.
+
+PS: It is recommended to install the plugin [MuiseDestiny/zotero-reference: PDF references add-on for Zotero](https://github.com/MuiseDestiny/zotero-reference) for a better experience.
+
+<img width="1510" alt="Xnip2023-06-22_21-14-44" src="https://github.com/Theigrams/zotero-pdf-custom-rename/assets/26341831/3ad15e33-a6dd-4429-a550-d3f58d9fddc1">
+
 
 ## Future work
 
