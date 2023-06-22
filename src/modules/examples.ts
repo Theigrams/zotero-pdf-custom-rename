@@ -1,6 +1,7 @@
 import { config } from "../../package.json";
 import { getString } from "../utils/locale";
 import { renameSelectedItems } from "./rename";
+import { messageWindow } from "./rename";
 
 function example(
   target: any,
@@ -37,21 +38,23 @@ export class BasicExampleFactory {
 export class KeyExampleFactory {
   @example
   static registerRenameShortcuts() {
-    const keysetId = `${config.addonRef}-keyset`;
-    const cmdsetId = `${config.addonRef}-cmdset`;
-    const cmdRenameId = `${config.addonRef}-cmd-rename`;
-    // Register an event key for Ctrl+D
+    if (!Zotero.Prefs.get("pdfrename.enableShortcut")) {
+      messageWindow(`Shortcut disabled`, "default");
+      ztoolkit.Shortcut.unregisterAll();
+      return;
+    }
+    const modSet = Zotero.Prefs.get("pdfrename.renameMod");
+    const keySet = Zotero.Prefs.get("pdfrename.renameKey");
+    messageWindow(`Shortcut enabled: ${modSet}+${keySet}`, "success");
     ztoolkit.Shortcut.register("event", {
       id: `${config.addonRef}-key-rename`,
-      key: "D",
-      modifiers: "control",
+      key: keySet,
+      modifiers: modSet,
       callback: (keyOptions) => {
         addon.hooks.renameSelectedItems();
       },
     });
   }
-
-
 
   @example
   static exampleShortcutConflictingCallback() {
@@ -82,23 +85,5 @@ export class UIExampleFactory {
       commandListener: (ev) => addon.hooks.renameSelectedItems(),
       icon: menuIcon,
     });
-  }
-}
-
-export class HelperExampleFactory {
-  @example
-  static progressWindowExample() {
-    new ztoolkit.ProgressWindow(config.addonName)
-      .createLine({
-        text: "ProgressWindow Example!",
-        type: "success",
-        progress: 100,
-      })
-      .show();
-  }
-
-  @example
-  static vtableExample() {
-    ztoolkit.getGlobal("alert")("See src/modules/preferenceScript.ts");
   }
 }

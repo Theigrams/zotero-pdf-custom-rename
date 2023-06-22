@@ -1,3 +1,4 @@
 /* eslint-disable no-undef */
-pref("__prefsPrefix__.enable", true);
-pref("__prefsPrefix__.input", "This is input");
+pref("extensions.zotero.enableShortcut", true);
+pref("extensions.zotero.renameMod", "Ctrl");
+pref("extensions.zotero.renameKey", "D");

@@ -1,5 +1,5 @@
 import { config } from "../../package.json";
-export { renameSelectedItems };
+export { renameSelectedItems, messageWindow };
 
 function messageWindow(info: string, status: string) {
   new ztoolkit.ProgressWindow(config.addonName, {
