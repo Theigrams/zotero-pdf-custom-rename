@@ -6,6 +6,7 @@ import {
 import { config } from "../package.json";
 import { getString, initLocale } from "./utils/locale";
 import { registerPrefsScripts } from "./modules/preferenceScript";
+import { renameSelectedItems } from "./modules/rename";
 
 async function onStartup() {
   await Promise.all([
@@ -19,36 +20,10 @@ async function onStartup() {
     `chrome://${config.addonRef}/content/icons/favicon.png`
   );
 
-  const popupWin = new ztoolkit.ProgressWindow(config.addonName, {
-    closeOnClick: true,
-    closeTime: -1,
-  })
-    .createLine({
-      text: getString("startup-begin"),
-      type: "default",
-      progress: 0,
-    })
-    .show();
-
   BasicExampleFactory.registerPrefs();
-
   KeyExampleFactory.registerShortcuts();
-
-  await Zotero.Promise.delay(1000);
-  popupWin.changeLine({
-    progress: 30,
-    text: `[30%] ${getString("startup-begin")}`,
-  });
-
-  UIExampleFactory.registerRightClickMenuItem();
-
-  popupWin.changeLine({
-    progress: 100,
-    text: `[100%] ${getString("startup-finish")}`,
-  });
-  popupWin.startCloseTimer(5000);
+  UIExampleFactory.registerRightClickMenuItemRename();
 }
-
 function onShutdown(): void {
   ztoolkit.unregisterAll();
   addon.data.dialog?.window?.close();
@@ -98,4 +73,5 @@ export default {
   onShutdown,
   onPrefsEvent,
   onShortcuts,
+  renameSelectedItems,
 };

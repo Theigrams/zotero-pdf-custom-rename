@@ -1,5 +1,6 @@
 startup-begin = Addon is loading
 startup-finish = Addon is ready
+menuitem-renamePDF = Rename attachment PDF
 menuitem-label = Addon Template: Helper Examples
 menupopup-label = Addon Template: Menupopup
 menuitem-submenulabel = Addon Template

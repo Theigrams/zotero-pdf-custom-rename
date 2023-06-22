@@ -1,5 +1,6 @@
 startup-begin = 插件加载中
 startup-finish = 插件已就绪
+menuitem-renamePDF = 重命名PDF附件
 menuitem-label = 插件模板: 帮助工具样例
 menupopup-label = 插件模板: 弹出菜单
 menuitem-submenulabel = 插件模板：子菜单

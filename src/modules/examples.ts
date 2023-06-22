@@ -132,14 +132,14 @@ export class KeyExampleFactory {
 
 export class UIExampleFactory {
   @example
-  static registerRightClickMenuItem() {
+  static registerRightClickMenuItemRename() {
     const menuIcon = `chrome://${config.addonRef}/content/icons/favicon@0.5x.png`;
     // item menuitem with icon
     ztoolkit.Menu.register("item", {
       tag: "menuitem",
-      id: "zotero-itemmenu-addontemplate-test",
-      label: getString("menuitem-label"),
-      // commandListener: (ev) => addon.hooks.onDialogEvents("dialogExample"),
+      id: "zotero-itemmenu-renamePDF",
+      label: getString("menuitem-renamePDF"),
+      commandListener: (ev) => addon.hooks.renameSelectedItems(),
       icon: menuIcon,
     });
   }
