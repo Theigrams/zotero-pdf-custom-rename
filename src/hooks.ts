@@ -21,7 +21,7 @@ async function onStartup() {
   );
 
   BasicExampleFactory.registerPrefs();
-  KeyExampleFactory.registerShortcuts();
+  KeyExampleFactory.registerRenameShortcuts();
   UIExampleFactory.registerRightClickMenuItemRename();
 }
 function onShutdown(): void {
@@ -48,22 +48,6 @@ async function onPrefsEvent(type: string, data: { [key: string]: any }) {
   }
 }
 
-function onShortcuts(type: string) {
-  switch (type) {
-    case "larger":
-      KeyExampleFactory.exampleShortcutLargerCallback();
-      break;
-    case "smaller":
-      KeyExampleFactory.exampleShortcutSmallerCallback();
-      break;
-    case "confliction":
-      KeyExampleFactory.exampleShortcutConflictingCallback();
-      break;
-    default:
-      break;
-  }
-}
-
 // Add your hooks here. For element click, etc.
 // Keep in mind hooks only do dispatch. Don't add code that does real jobs in hooks.
 // Otherwise the code would be hard to read and maintian.
@@ -72,6 +56,5 @@ export default {
   onStartup,
   onShutdown,
   onPrefsEvent,
-  onShortcuts,
   renameSelectedItems,
 };
