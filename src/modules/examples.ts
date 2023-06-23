@@ -43,6 +43,7 @@ export class KeyExampleFactory {
       ztoolkit.Shortcut.unregisterAll();
       return;
     }
+    ztoolkit.Shortcut.unregisterAll();
     const modSet = Zotero.Prefs.get("pdfrename.shortcut.modifiers")?.toString();
     const keySet = Zotero.Prefs.get("pdfrename.shortcut.key")?.toString();
     messageWindow(`Shortcut on: ${modSet}+${keySet}`, "success");

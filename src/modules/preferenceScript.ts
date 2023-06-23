@@ -30,7 +30,7 @@ function bindPrefEvents() {
     .prefs!.window.document.querySelector(
       `#zotero-prefpane-${config.addonRef}-shortcut-modifiers`
     )
-    ?.addEventListener("change", (e) => {
+    ?.addEventListener("command", (e) => {
       KeyExampleFactory.registerRenameShortcuts();
     });
 

@@ -5,44 +5,80 @@
   id="zotero-prefpane-__addonRef__"
   onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', {window})"
 >
-  <html:h1 data-l10n-id="pref-title"></html:h1>
+  <vbox class="main-section">
+    <html:h1 data-l10n-id="pref-title"></html:h1>
+    <vbox>
+      <groupbox>
+        <label><html:h2 data-l10n-id="pref-h1"></html:h2></label>
+        <vbox>
+          <checkbox
+            id="zotero-prefpane-__addonRef__-shortcut-enable"
+            preference="extensions.zotero.__addonRef__.shortcut.enable"
+            data-l10n-id="pref-shortcut-enable"
+          />
+          <hbox align="center">
+            <label data-l10n-id="pref-modifiers"></label>
+            <menulist
+              id="zotero-prefpane-__addonRef__-shortcut-modifiers"
+              preference="extensions.zotero.__addonRef__.shortcut.modifiers"
+              style="margin-left: 0; width: 7em"
+              native="true"
+            >
+              <menupopup>
+                <menuitem label="alt" value="alt" />
+                <menuitem label="control" value="control" />
+                <menuitem label="meta" value="meta" />
+                <menuitem label="accel" value="accel" />
+              </menupopup>
+            </menulist>
+            <label data-l10n-id="pref-key"></label>
+            <html:input
+              type="text"
+              id="zotero-prefpane-__addonRef__-shortcut-key"
+              preference="extensions.zotero.__addonRef__.shortcut.key"
+              size="4"
+            ></html:input>
+            <label data-l10n-id="pref-defaultShortcut"></label>
+          </hbox>
+        </vbox>
+      </groupbox>
 
-  <groupbox>
-    <label><html:h2 data-l10n-id="pref-h1"></html:h2></label>
+      <separator />
+      <separator class="thin" />
 
-    <checkbox
-      id="zotero-prefpane-__addonRef__-shortcut-enable"
-      preference="extensions.zotero.__addonRef__.shortcut.enable"
-      data-l10n-id="pref-shortcut-enable"
-    />
-    <hbox>
-      <html:label
-        for="modifiers-input"
-        data-l10n-id="pref-modifiers"
-      ></html:label>
-      <html:input
-        type="text"
-        id="zotero-prefpane-__addonRef__-shortcut-modifiers"
-        size="5"
-        preference="extensions.zotero.__addonRef__.shortcut.modifiers"
-      ></html:input>
-      <html:label for="key-input" data-l10n-id="pref-key"></html:label>
-      <html:input
-        type="text"
-        id="zotero-prefpane-__addonRef__-shortcut-key"
-        size="5"
-        preference="extensions.zotero.__addonRef__.shortcut.key"
-      ></html:input>
-      <html:label data-l10n-id="pref-defaultShortcut"></html:label>
-    </hbox>
-  </groupbox>
-</vbox>
-<separator />
-<separator class="thin" />
-
-<vbox>
-  <html:label
-    data-l10n-id="pref-help"
-    data-l10n-args='{"time": "__buildTime__","name": "__addonName__","version":"__buildVersion__"}'
-  ></html:label>
+      <vbox>
+        <groupbox>
+          <label><html:h2>About</html:h2></label>
+          <hbox align="bottom">
+            <label value="Links: "></label>
+            <label
+              is="zotero-text-link"
+              value="Help"
+              href="https://github.com/Theigrams/zotero-pdf-custom-rename#zotero-pdf-rename"
+              style="margin-right: 5px"
+            ></label>
+            <label
+              is="zotero-text-link"
+              value="Issue"
+              href="https://github.com/Theigrams/zotero-pdf-custom-rename/issues"
+              style="margin-right: 5px"
+            ></label>
+            <label
+              is="zotero-text-link"
+              value="History"
+              href="https://github.com/Theigrams/zotero-pdf-custom-rename/releases"
+              style="margin-right: 5px"
+            ></label>
+          </hbox>
+          <separator id="storage-separator" class="thin" />
+          <hbox>
+            <html:label
+              data-l10n-id="pref-help"
+              data-l10n-args='{"time": "__buildTime__","name": "__addonName__","version":"__buildVersion__"}'
+            ></html:label>
+          </hbox>
+        </groupbox>
+      </vbox>
+    </vbox>
+  </vbox>
 </vbox>
