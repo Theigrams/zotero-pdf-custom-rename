@@ -28,17 +28,9 @@ function bindPrefEvents() {
 
   addon.data
     .prefs!.window.document.querySelector(
-      `#zotero-prefpane-${config.addonRef}-shortcut-modifiers`
+      `#zotero-prefpane-${config.addonRef}-shortcut-confirm`
     )
     ?.addEventListener("command", (e) => {
-      KeyExampleFactory.registerRenameShortcuts();
-    });
-
-  addon.data
-    .prefs!.window.document.querySelector(
-      `#zotero-prefpane-${config.addonRef}-shortcut-key`
-    )
-    ?.addEventListener("change", (e) => {
       KeyExampleFactory.registerRenameShortcuts();
     });
 }

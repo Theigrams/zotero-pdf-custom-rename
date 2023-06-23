@@ -1,6 +1,7 @@
 <linkset>
   <html:link rel="localization" href="__addonRef__-preferences.ftl" />
 </linkset>
+<?xml-stylesheet href="chrome://zotero/skin/zotero.css" type="text/css"?>
 <vbox
   id="zotero-prefpane-__addonRef__"
   onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', {window})"
@@ -15,6 +16,7 @@
             id="zotero-prefpane-__addonRef__-shortcut-enable"
             preference="extensions.zotero.__addonRef__.shortcut.enable"
             data-l10n-id="pref-shortcut-enable"
+            native="true"
           />
           <hbox align="center">
             <label data-l10n-id="pref-modifiers"></label>
@@ -37,8 +39,14 @@
               id="zotero-prefpane-__addonRef__-shortcut-key"
               preference="extensions.zotero.__addonRef__.shortcut.key"
               size="4"
+              style="margin-right: 15px"
             ></html:input>
-            <label data-l10n-id="pref-defaultShortcut"></label>
+            <button
+              id="zotero-prefpane-__addonRef__-shortcut-confirm"
+              label="OK"
+              image="chrome://zotero/skin/tick.png"
+              dir="reverse"
+            ></button>
           </hbox>
         </vbox>
       </groupbox>
