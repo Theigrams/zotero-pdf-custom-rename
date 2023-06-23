@@ -20,31 +20,25 @@ export async function registerPrefsScripts(_window: Window) {
 function bindPrefEvents() {
   addon.data
     .prefs!.window.document.querySelector(
-      `#zotero-prefpane-${config.addonRef}-enableShortcut`
+      `#zotero-prefpane-${config.addonRef}-shortcut-enable`
     )
     ?.addEventListener("command", (e) => {
       KeyExampleFactory.registerRenameShortcuts();
     });
 
-  // addon.data
-  //   .prefs!.window.document.querySelector(
-  //     `#zotero-prefpane-${config.addonRef}-renameMod`
-  //   )
-  //   ?.addEventListener("change", (e) => {
-  //     addon.data.prefs!.window.alert(
-  //       `Successfully changed to ${(e.target as HTMLInputElement).value}!`
-  //     );
-  //     KeyExampleFactory.registerRenameShortcuts();
-  //   });
+  addon.data
+    .prefs!.window.document.querySelector(
+      `#zotero-prefpane-${config.addonRef}-shortcut-modifiers`
+    )
+    ?.addEventListener("change", (e) => {
+      KeyExampleFactory.registerRenameShortcuts();
+    });
 
-  // addon.data
-  //   .prefs!.window.document.querySelector(
-  //     `#zotero-prefpane-${config.addonRef}-renameKey`
-  //   )
-  //   ?.addEventListener("change", (e) => {
-  //     addon.data.prefs!.window.alert(
-  //       `Successfully changed to ${(e.target as HTMLInputElement).value}!`
-  //     );
-  //     KeyExampleFactory.registerRenameShortcuts();
-  //   });
+  addon.data
+    .prefs!.window.document.querySelector(
+      `#zotero-prefpane-${config.addonRef}-shortcut-key`
+    )
+    ?.addEventListener("change", (e) => {
+      KeyExampleFactory.registerRenameShortcuts();
+    });
 }

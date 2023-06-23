@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
-pref("extensions.zotero.enableShortcut", true);
-pref("extensions.zotero.renameMod", "Ctrl");
-pref("extensions.zotero.renameKey", "D");
+pref("extensions.zotero.shortcut.enable", true);
+pref("extensions.zotero.shortcut.modifiers", "control");
+pref("extensions.zotero.shortcut.key", "D");

@@ -48,18 +48,19 @@ PS: It is recommended to install the plugin [MuiseDestiny/zotero-style](https://
 
 ### Short Cut
 
-Now, we can use `Ctrl+D` to rename the PDF files. Moreover, we can customize the short cut in the `Preferences` of Zotero. 
+Now, we can use `control+D` to rename the PDF files. Moreover, we can customize the short cut in the `Preferences` of Zotero. 
 
-The custom short cut can be a combination of `alt`, `control`, `meta` and `accel`. The following table shows the corresponding keys on Windows and Mac.
+The custom short cut can be a combination of the modifier keys and another key. The modifier keys can be `alt`, `control`, `meta` and `accel`, while another key can be any key on the keyboard.
 
-| string\key | Windows            | Mac       |
-| ---------- | ------------------ | --------- |
-| `alt`      | Alt                | ⌥ Option  |
-| `control`  | Ctrl               | ⌃ Control |
-| `meta`     | ❌  *Not supported* | ⌘ Command |
-| `accel`    | Ctrl               | ⌘ Command |
+The following table shows the corresponding modifier keys on Windows and Mac.
 
-However, when the short cut is changed, **the plugin will not work immediately**. You need to reopen the `short cut enable` option in the `Preferences`.
+| modifier  | Windows            | Mac       |
+| --------- | ------------------ | --------- |
+| `alt`     | Alt                | ⌥ Option  |
+| `control` | Ctrl               | ⌃ Control |
+| `meta`    | ❌  *Not supported* | ⌘ Command |
+| `accel`   | Ctrl               | ⌘ Command |
+
 
 ## Future work
 

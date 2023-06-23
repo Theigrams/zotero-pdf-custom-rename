@@ -38,14 +38,14 @@ export class BasicExampleFactory {
 export class KeyExampleFactory {
   @example
   static registerRenameShortcuts() {
-    if (!Zotero.Prefs.get("pdfrename.enableShortcut")) {
-      messageWindow(`Shortcut disabled`, "default");
+    if (!Zotero.Prefs.get("pdfrename.shortcut.enable")) {
+      messageWindow(`Shortcut off`, "default");
       ztoolkit.Shortcut.unregisterAll();
       return;
     }
-    const modSet = Zotero.Prefs.get("pdfrename.renameMod")?.toString();
-    const keySet = Zotero.Prefs.get("pdfrename.renameKey")?.toString();
-    messageWindow(`Shortcut enabled: ${modSet}+${keySet}`, "success");
+    const modSet = Zotero.Prefs.get("pdfrename.shortcut.modifiers")?.toString();
+    const keySet = Zotero.Prefs.get("pdfrename.shortcut.key")?.toString();
+    messageWindow(`Shortcut on: ${modSet}+${keySet}`, "success");
     ztoolkit.Shortcut.register("event", {
       id: `${config.addonRef}-key-rename`,
       key: keySet || "D",
