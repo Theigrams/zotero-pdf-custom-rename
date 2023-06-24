@@ -23,20 +23,11 @@ async function renameSelectedItems() {
   }
 
   for (const item of items) {
-    const attachments = getAttachmentFromItem(item);
-    const oldTitle = item.getField("title").toString().slice(0, 10);
-    if (attachments.length === 0) {
-      messageWindow("No attachments found for " + oldTitle, "fail");
+    const att = getAttachmentFromItem(item);
+    if (att === -1) {
       continue;
-    } else if (attachments.length > 1) {
-      messageWindow(
-        " " + attachments.length + " attachments found for " + oldTitle,
-        "default"
-      );
     }
-    const att = attachments[0];
-    let newAttName = getAttachmentName(item);
-    newAttName = Zotero.Utilities.cleanTags(newAttName);
+    const newAttName = getAttachmentName(item);
     const status = await att.renameAttachmentFile(newAttName);
     if (status === true) {
       messageWindow(newAttName, "success");
@@ -70,12 +61,22 @@ function getSelectedItems() {
 }
 
 function getAttachmentFromItem(item: Zotero.Item) {
+  const oldTitle = item.getField("title").toString().slice(0, 10);
   let attachments = item.getAttachments().map((id) => Zotero.Items.get(id));
   //   attachments = attachments.filter(att => att.attachmentLinkMode === Zotero.Attachments.LINK_MODE_LINKED_FILE);
   attachments = attachments.filter((att) =>
     att.getDisplayTitle().endsWith(".pdf")
   );
-  return attachments;
+  if (attachments.length === 0) {
+    messageWindow("No attachments found for " + oldTitle, "fail");
+    return -1;
+  } else if (attachments.length > 1) {
+    messageWindow(
+      " " + attachments.length + " attachments found for " + oldTitle,
+      "default"
+    );
+  }
+  return attachments[0];
 }
 
 function getAttachmentName(item: Zotero.Item) {
@@ -85,7 +86,8 @@ function getAttachmentName(item: Zotero.Item) {
     shortTitle = item.getField("title");
   }
   const year = item.getField("year");
-  const newFileName = `${jst}_${year}_${shortTitle}.pdf`;
+  let newFileName = `${jst}_${year}_${shortTitle}.pdf`;
+  newFileName = Zotero.Utilities.cleanTags(newFileName);
   Zotero.debug("[renamePDF] New file name: " + newFileName);
   return newFileName;
 }
