@@ -1,7 +1,12 @@
-pref-title = PDF Rename Settings
-pref-h1 = Shortcut Settings
+pref-h1-1 = PDF Rename Settings
+pref-h2-1 = Shortcut settings
 pref-shortcut-enable =
     .label = Enable shortcut keys to rename PDF files (Default: control+D)
 pref-modifiers = Shortcut key:  
 pref-key = + 
+pref-h1-2 = File Move Settings
+pref-h2-2 = Move file directory
+pref-move-description = After renaming the attachment, move the file to the specified directory and convert it to link mode.
+pref-move-enable =
+    .label = Enable file move
 pref-help = { $name } Build { $version } { $time }

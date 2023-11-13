@@ -1,7 +1,12 @@
-pref-title = PDF重命名设置
-pref-h1 = 快捷键设置
+pref-h1-1 = PDF重命名设置
+pref-h2-1 = 快捷键设置
 pref-shortcut-enable =
     .label = 启用快捷键重命名PDF文件（默认：control+D）
 pref-modifiers = 快捷键: 
 pref-key = + 
+pref-h1-2 = 移动文件
+pref-h2-2 = 移动文件目录
+pref-move-description = 重命名文件时，将文件移动到指定目录，并转换为链接模式。
+pref-move-enable =
+    .label = 启用移动文件
 pref-help = { $name } Build { $version } { $time }

@@ -21,7 +21,7 @@ async function renameSelectedItems() {
   } else if (items.length > 1) {
     messageWindow(" " + items.length + " items selected", "default");
   }
-
+  const LinkedFileMode = true;
   for (const item of items) {
     const att = getAttachmentFromItem(item);
     if (att === -1) {
@@ -61,7 +61,7 @@ function getSelectedItems() {
 }
 
 function getAttachmentFromItem(item: Zotero.Item) {
-  const oldTitle = item.getField("title").toString().slice(0, 10);
+  const oldTitle = item.getField("title").toString().slice(0, 15);
   let attachments = item.getAttachments().map((id) => Zotero.Items.get(id));
   //   attachments = attachments.filter(att => att.attachmentLinkMode === Zotero.Attachments.LINK_MODE_LINKED_FILE);
   attachments = attachments.filter((att) =>

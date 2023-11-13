@@ -1,6 +1,6 @@
 import { config } from "../../package.json";
 import { getString } from "../utils/locale";
-import { KeyExampleFactory } from "./examples";
+import { KeyExampleFactory, UIExampleFactory } from "./examples";
 
 export async function registerPrefsScripts(_window: Window) {
   // This function is called when the prefs window is opened
@@ -32,5 +32,15 @@ function bindPrefEvents() {
     )
     ?.addEventListener("command", (e) => {
       KeyExampleFactory.registerRenameShortcuts();
+    });
+
+  addon.data
+    .prefs!.window.document.querySelector(
+      `#zotero-prefpane-${config.addonRef}-FilePathButton`
+    )
+    ?.addEventListener("command", (e) => {
+      Zotero.debug("[PDF Rename] updateAttachmentPathUI: ");
+      UIExampleFactory.folderPicker();
+      UIExampleFactory.updateAttachmentPathUI();
     });
 }

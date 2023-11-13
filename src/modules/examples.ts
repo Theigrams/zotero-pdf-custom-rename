@@ -87,4 +87,29 @@ export class UIExampleFactory {
       icon: menuIcon,
     });
   }
+
+  @example
+  static async updateAttachmentPathUI() {
+    const path = Zotero.Prefs.get("pdfrename.movefile.path") as string;
+    const filefield = addon.data.prefs!.window.document.getElementById(
+      "zotero-pdfrename-FilePath"
+    ) as HTMLInputElement;
+    Components.utils.import("resource://gre/modules/osfile.jsm");
+    if (await OS.File.exists(path)) {
+      filefield.style.border = "none";
+      filefield.style.background = "transparent";
+      filefield.value = path;
+    } else {
+      filefield.value = "";
+    }
+  }
+
+  @example
+  static async folderPicker() {
+    const path = await new ztoolkit.FilePicker(
+      "Select a folder",
+      "folder"
+    ).open();
+    ztoolkit.getGlobal("alert")(`Selected ${path}`);
+  }
 }
