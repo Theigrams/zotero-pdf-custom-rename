@@ -14,8 +14,7 @@ import {
 import { env, exit } from "process";
 import replaceInFile from "replace-in-file";
 const { sync } = replaceInFile;
-import details from "../package.json" assert { type: "json" };
-
+import details from "../package.json" with { type: "json" };
 const { name, author, description, homepage, version, config } = details;
 
 function copyFileSync(source, target) {
