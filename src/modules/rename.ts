@@ -62,21 +62,27 @@ function getSelectedItems() {
 
 function getAttachmentFromItem(item: Zotero.Item) {
   const oldTitle = item.getField("title").toString().slice(0, 10);
-  let attachments = item.getAttachments().map((id) => Zotero.Items.get(id));
+  const attachmentIDs = item.getAttachments();
+  const attachments = attachmentIDs.map((id) => Zotero.Items.get(id));
+
   //   attachments = attachments.filter(att => att.attachmentLinkMode === Zotero.Attachments.LINK_MODE_LINKED_FILE);
-  attachments = attachments.filter((att) =>
-    att.getDisplayTitle().endsWith(".pdf")
-  );
-  if (attachments.length === 0) {
+  const pdfAttachments = attachments.filter((att) => {
+    return (
+      att.attachmentContentType === "application/pdf" ||
+      (att.attachmentFilename &&
+        att.attachmentFilename.toLowerCase().endsWith(".pdf"))
+    );
+  });
+  if (pdfAttachments.length === 0) {
     messageWindow("No attachments found for " + oldTitle, "fail");
     return -1;
-  } else if (attachments.length > 1) {
+  } else if (pdfAttachments.length > 1) {
     messageWindow(
-      " " + attachments.length + " attachments found for " + oldTitle,
+      " " + pdfAttachments.length + " attachments found for " + oldTitle,
       "default"
     );
   }
-  return attachments[0];
+  return pdfAttachments[0];
 }
 
 function getAttachmentName(item: Zotero.Item) {
