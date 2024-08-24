@@ -1,6 +1,6 @@
 {
   "name": "zotero-pdf-rename",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "Custom rename pdf",
   "config": {
     "addonName": "Zotero PDF Rename",
