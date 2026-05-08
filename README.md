@@ -1,6 +1,6 @@
 # Zotero PDF Rename
 
-[![zotero target version](https://img.shields.io/badge/Zotero-7.0.*-green&logo=zotero&logoColor=CC2936)](https://www.zotero.org/support/beta_builds)
+[![zotero target version](https://img.shields.io/badge/Zotero-9-green?logo=zotero&logoColor=CC2936)](https://www.zotero.org/support/beta_builds)
 [![Latest release](https://img.shields.io/github/v/release/Theigrams/zotero-pdf-custom-rename)](https://github.com/Theigrams/zotero-pdf-custom-rename/releases)
 [![code size](https://img.shields.io/github/languages/code-size/Theigrams/zotero-pdf-custom-rename)](#zotero-pdf-custom-rename)
 ![Downloads latest release](https://img.shields.io/github/downloads/Theigrams/zotero-pdf-custom-rename/latest/total?color=yellow)
@@ -9,7 +9,7 @@
 
 This is a Zotero plugin that allows you to rename PDF files in your Zotero library using custom rules.
 
-**Note**: *This plugin only works on **Zotero 7.0** and above*.
+**Note**: *Updated to support **Zotero 9**.*
 
 ## Usage
 

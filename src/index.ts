@@ -1,10 +1,10 @@
-import { BasicTool } from "zotero-plugin-toolkit/dist/basic";
+import { BasicTool } from "zotero-plugin-toolkit";
 import Addon from "./addon";
 import { config } from "../package.json";
 
 const basicTool = new BasicTool();
 
-if (!basicTool.getGlobal("Zotero")[config.addonInstance]) {
+if (!(basicTool.getGlobal("Zotero") as any)[config.addonInstance]) {
   // Set global variables
   _globalThis.Zotero = basicTool.getGlobal("Zotero");
   _globalThis.ZoteroPane = basicTool.getGlobal("ZoteroPane");
@@ -21,7 +21,7 @@ if (!basicTool.getGlobal("Zotero")[config.addonInstance]) {
     addon.data.env === "development";
   ztoolkit.basicOptions.debug.disableDebugBridgePassword =
     addon.data.env === "development";
-  Zotero[config.addonInstance] = addon;
+  (Zotero as any)[config.addonInstance] = addon;
   // Trigger addon hook for initialization
   addon.hooks.onStartup();
 }
