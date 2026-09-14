@@ -17,14 +17,19 @@ Select one or more items in your Zotero library and right click to open the cont
 
 <img width="638" alt="image" src="https://github.com/Theigrams/zotero-pdf-custom-rename/assets/26341831/01f7ac99-0898-4a33-8377-a5ab2ed05eb8">
 
-Then the PDF files will be renamed according to the custom rules you set in the plugin preferences(not implemented yet).
+Then the PDF files will be renamed according to the custom rules you set in the plugin preferences.
 
-### Default rules
+### Custom Rules
 
-This plugin will read the journal name and year from the metadata of the item and rename the PDF file as follows:
+You can customize the plugin's behavior via the Zotero preferences panel under the Zotero PDF Rename tab:
+- **Enable automatic tagging**: Toggles adding a `Jab/#` tag for the journal short title when renaming.
+- **Automatically rename**: Automatically renames the PDF attachment when the parent item is updated or modified.
+- **Naming format**: Allows customization of the naming convention using variables: `{{jst}}`, `{{year}}`, and `{{shortTitle}}`.
+
+The default naming format is:
 
 ```
-{short journal name}_{year}_{short title}.pdf
+{{jst}}_{{year}}_{{shortTitle}}
 ```
 
 For example, the PDF file of the item below will be renamed as `TPAMI_2016_Go-ICP.pdf`.
@@ -65,5 +70,5 @@ The following table shows the corresponding modifier keys on Windows and Mac.
 ## Future work
 
 - [x] Add a short cut for the renaming function
-- [ ] Preferences panel to allow users to customize the rules.
+- [x] Preferences panel to allow users to customize the rules.
 - [ ] Better way to extract the short name of the journal.

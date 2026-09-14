@@ -1,5 +1,5 @@
 import { config } from "../../package.json";
-export { renameSelectedItems, messageWindow };
+export { renameSelectedItems, renameItem, messageWindow };
 
 function messageWindow(info: string, status: string) {
   new ztoolkit.ProgressWindow(config.addonName, {
@@ -13,8 +13,53 @@ function messageWindow(info: string, status: string) {
     .show();
 }
 
+async function renameItem(item: Zotero.Item) {
+  const att: any = getAttachmentFromItem(item);
+  if (!att || att === -1) {
+    return;
+  }
+  await renameSpecificAttachment(item, att);
+}
+
+async function renameSpecificAttachment(parentItem: Zotero.Item, att: any) {
+  const newAttName = getAttachmentName(parentItem);
+  
+  let currentFilename = att.attachmentFilename;
+  if (!currentFilename && att.attachmentPath) {
+     const pathParts = att.attachmentPath.split(/[\\/]/);
+     currentFilename = pathParts[pathParts.length - 1];
+  }
+
+  let currentTitle = att.getField("title");
+  
+  if (currentFilename === newAttName && currentTitle === newAttName) {
+    // Already named correctly
+    return;
+  }
+
+  let status: any = true;
+  if (currentFilename !== newAttName) {
+    status = await att.renameAttachmentFile(newAttName);
+  }
+
+  if (status === true) {
+    messageWindow(newAttName, "success");
+    if (newAttName !== currentTitle) {
+      att.setField("title", newAttName);
+      await att.saveTx();
+    }
+  } else if (status === -1) {
+    messageWindow("Destination file exists; use force to overwrite.", "fail");
+  } else {
+    messageWindow("Attachment file not found.", "fail");
+  }
+}
+
 async function renameSelectedItems() {
-  const items = getSelectedItems();
+  const activePane = Zotero.getActiveZoteroPane();
+  if (!activePane) return;
+  const items = activePane.getSelectedItems() || [];
+  
   if (items.length === 0) {
     messageWindow("No items selected", "fail");
     return;
@@ -22,55 +67,51 @@ async function renameSelectedItems() {
     messageWindow(" " + items.length + " items selected", "default");
   }
 
-  for (const item of items) {
-    const att = getAttachmentFromItem(item);
-    if (att === -1) {
-      continue;
-    }
-    const newAttName = getAttachmentName(item);
-    const status = await att.renameAttachmentFile(newAttName);
-    if (status === true) {
-      messageWindow(newAttName, "success");
-      if (newAttName !== att.getField("title")) {
-        att.setField("title", newAttName);
-        att.saveTx();
+  for (const item of items as any[]) {
+    if (item.isRegularItem()) {
+      await renameItem(item);
+    } else if (item.isAttachment()) {
+      const parentItem = Zotero.Items.get(item.parentItemID || item.parentID);
+      if (parentItem) {
+        await renameSpecificAttachment(parentItem as Zotero.Item, item);
       }
-    } else if (status === -1) {
-      messageWindow("Destination file exists; use force to overwrite.", "fail");
-    } else {
-      messageWindow("Attachment file not found.", "fail");
     }
   }
 }
 
 function getSelectedItems() {
-  let items = Zotero.getActiveZoteroPane().getSelectedItems();
+  const activePane = Zotero.getActiveZoteroPane();
+  if (!activePane) return [];
+  let items = activePane.getSelectedItems() || [];
   // get regular items
   let itemIds = items
-    .filter((item) => item.isRegularItem())
-    .map((item) => item.id as number);
+    .filter((item: any) => item.isRegularItem())
+    .map((item: any) => item.id as number);
   // get items from attachment
   const itemIdsFromAttachment = items
-    .filter((item) => item.isAttachment())
-    .map((item) => item.parentItemID as number);
+    .filter((item: any) => item.isAttachment())
+    .map((item: any) => (item.parentItemID || item.parentID) as number);
   // remove duplicate items
   itemIds = itemIds.concat(itemIdsFromAttachment);
   itemIds = Zotero.Utilities.arrayUnique(itemIds);
-  items = itemIds.map((id) => Zotero.Items.get(id));
+  items = itemIds
+    .map((id: number) => Zotero.Items.get(id) as Zotero.Item)
+    .filter((item: any) => item);
   return items;
 }
 
-function getAttachmentFromItem(item: Zotero.Item) {
+function getAttachmentFromItem(item: Zotero.Item): any {
   const oldTitle = item.getField("title").toString().slice(0, 10);
   const attachmentIDs = item.getAttachments();
-  const attachments = attachmentIDs.map((id) => Zotero.Items.get(id));
+  let attachments = attachmentIDs.map((id: number) => Zotero.Items.get(id));
 
   //   attachments = attachments.filter(att => att.attachmentLinkMode === Zotero.Attachments.LINK_MODE_LINKED_FILE);
-  const pdfAttachments = attachments.filter((att) => {
+  const pdfAttachments = attachments.filter((att: any) => {
     return (
-      att.attachmentContentType === "application/pdf" ||
-      (att.attachmentFilename &&
-        att.attachmentFilename.toLowerCase().endsWith(".pdf"))
+      att &&
+      (att.attachmentContentType === "application/pdf" ||
+        (att.attachmentFilename &&
+          att.attachmentFilename.toLowerCase().endsWith(".pdf")))
     );
   });
   if (pdfAttachments.length === 0) {
@@ -91,8 +132,40 @@ function getAttachmentName(item: Zotero.Item) {
   if (!shortTitle) {
     shortTitle = item.getField("title");
   }
-  const year = item.getField("year");
-  let newFileName = `${jst}_${year}_${shortTitle}.pdf`;
+  const safeGetField = (field: string): string => {
+    try {
+      return (item.getField(field) as string) || "";
+    } catch {
+      return "";
+    }
+  };
+
+  const year = safeGetField("year");
+  
+  let author = "";
+  try {
+    const creators = item.getCreatorsJSON();
+    if (creators && creators.length > 0) {
+      const firstCreator = creators[0];
+      author = firstCreator.lastName || firstCreator.name || firstCreator.firstName || "";
+    }
+  } catch (e) {
+    author = "";
+  }
+  
+  const publisher = safeGetField("publisher");
+  const publication = safeGetField("publicationTitle");
+  
+  const namingFormat = Zotero.Prefs.get("pdfrename.namingFormat")?.toString() || "{{jst}}_{{year}}_{{shortTitle}}";
+  let newFileName = namingFormat
+    .replace(/\{\{jst\}\}/g, jst || "")
+    .replace(/\{\{year\}\}/g, year || "")
+    .replace(/\{\{shortTitle\}\}/g, shortTitle || "")
+    .replace(/\{\{author\}\}/g, author || "")
+    .replace(/\{\{publisher\}\}/g, publisher || "")
+    .replace(/\{\{publication\}\}/g, publication || "");
+  
+  newFileName = `${newFileName}.pdf`;
   newFileName = Zotero.Utilities.cleanTags(newFileName);
   Zotero.debug("[renamePDF] New file name: " + newFileName);
   return newFileName;
@@ -111,8 +184,11 @@ function getJournalShortTitle(item: Zotero.Item) {
     title = generateJournalShortTitle(item);
     Zotero.debug("[renamePDF] Generated journal short title: " + title);
     if (title !== "") {
-      item.addTag("Jab/#" + title);
-      item.saveTx();
+      const taggingEnabled = Zotero.Prefs.get("pdfrename.tagging.enable");
+      if (taggingEnabled !== false) {
+        item.addTag("Jab/#" + title);
+        item.saveTx();
+      }
     }
   }
   return title;
