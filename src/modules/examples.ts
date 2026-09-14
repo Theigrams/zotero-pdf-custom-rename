@@ -1,6 +1,6 @@
 import { config } from "../../package.json";
 import { getString } from "../utils/locale";
-import { messageWindow, renameSelectedItems } from "./rename";
+import { messageWindow, renameSelectedItems, renameItem } from "./rename";
 
 function example(
   target: any,
@@ -89,5 +89,52 @@ export class UIExampleFactory {
       inject(win);
     }
     ztoolkit.basicOptions.listeners.callbacks.onMainWindowLoad.add(inject);
+  }
+}
+
+export class AutoRenameFactory {
+  private static observerID: string | null = null;
+
+  @example
+  static registerAutoRenameObserver() {
+    if (this.observerID) {
+      Zotero.Notifier.unregisterObserver(this.observerID);
+      this.observerID = null;
+    }
+
+    const notifierCallback = {
+      notify: async function (
+        event: string,
+        type: string,
+        ids: string[] | number[],
+        extraData: any
+      ) {
+        if (event === "modify" && type === "item") {
+          const autoRenameEnabled = Zotero.Prefs.get("pdfrename.autoRename.enable");
+          if (!autoRenameEnabled) return;
+
+          for (const id of ids) {
+            const item = Zotero.Items.get(id);
+            if (item && item.isRegularItem()) {
+              await renameItem(item);
+            }
+          }
+        }
+      },
+    };
+
+    this.observerID = Zotero.Notifier.registerObserver(
+      notifierCallback,
+      ["item"],
+      config.addonRef + "-autorename"
+    );
+  }
+
+  @example
+  static unregisterAutoRenameObserver() {
+    if (this.observerID) {
+      Zotero.Notifier.unregisterObserver(this.observerID);
+      this.observerID = null;
+    }
   }
 }

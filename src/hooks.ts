@@ -2,6 +2,7 @@ import {
   BasicExampleFactory,
   KeyExampleFactory,
   UIExampleFactory,
+  AutoRenameFactory,
 } from "./modules/examples";
 import { config } from "../package.json";
 import { getString, initLocale } from "./utils/locale";
@@ -23,9 +24,11 @@ async function onStartup() {
   BasicExampleFactory.registerPrefs();
   KeyExampleFactory.registerRenameShortcuts();
   UIExampleFactory.registerRightClickMenuItemRename();
+  AutoRenameFactory.registerAutoRenameObserver();
 }
 function onShutdown(): void {
   ztoolkit.unregisterAll();
+  AutoRenameFactory.unregisterAutoRenameObserver();
   addon.data.dialog?.window?.close();
   // Remove addon object
   addon.data.alive = false;

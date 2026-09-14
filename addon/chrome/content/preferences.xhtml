@@ -56,6 +56,39 @@
 
       <vbox>
         <groupbox>
+          <label><html:h2 data-l10n-id="pref-h1-rules"></html:h2></label>
+          <vbox>
+            <checkbox
+              id="zotero-prefpane-__addonRef__-tagging-enable"
+              preference="extensions.zotero.__addonRef__.tagging.enable"
+              data-l10n-id="pref-tagging-enable"
+              native="true"
+            />
+            <checkbox
+              id="zotero-prefpane-__addonRef__-autoRename-enable"
+              preference="extensions.zotero.__addonRef__.autoRename.enable"
+              data-l10n-id="pref-autoRename-enable"
+              native="true"
+            />
+            <hbox align="center" style="margin-top: 10px;">
+              <label data-l10n-id="pref-namingFormat"></label>
+              <html:input
+                type="text"
+                id="zotero-prefpane-__addonRef__-namingFormat"
+                preference="extensions.zotero.__addonRef__.namingFormat"
+                size="40"
+              ></html:input>
+            </hbox>
+            <description data-l10n-id="pref-namingFormat-desc" style="color: gray; margin-left: 5px; margin-top: 5px; font-size: 0.9em;"></description>
+          </vbox>
+        </groupbox>
+      </vbox>
+
+      <separator />
+      <separator class="thin" />
+
+      <vbox>
+        <groupbox>
           <label><html:h2>About</html:h2></label>
           <hbox align="bottom">
             <label value="Links: "></label>

@@ -1,4 +1,5 @@
-import { ZoteroToolkit, DialogHelper } from "zotero-plugin-toolkit";
+// @ts-ignore
+import { ZoteroToolkit } from "zotero-plugin-toolkit/ztoolkit";
 import hooks from "./hooks";
 
 class Addon {
@@ -14,7 +15,7 @@ class Addon {
       columns: Array<any>;
       rows: Array<{ [dataKey: string]: string }>;
     };
-    dialog?: DialogHelper;
+    dialog?: any;
   };
   public hooks: typeof hooks;
   public api: object;
